@@ -1,0 +1,3 @@
+[1103/103107:ERROR:process_reader_win.cc(233)] ReadMemory at 0x8f7000 of 36864 bytes failed: Vain osa ReadProcessMemory- tai WriteProcessMemory-pyynnöstä suoritettiin. (0x12B)
+[1103/103107:ERROR:crash_report_exception_handler.cc(98)] WriteEverything failed
+[1103/103107:ERROR:scoped_process_suspend.cc(38)] NtResumeProcess: Yritettiin käyttää suljettavaa prosessia.  (0xc000010a)
