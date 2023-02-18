@@ -13,6 +13,7 @@
     <style>
     body{
         cursor:none;
+        background-color: #F4FAFF;
     }
     .hidden{
         opacity:0;
@@ -48,13 +49,13 @@
         display:block;
     }
     .products-list a{
-        color:#ff0000;
+        color:#000000;
         text-shadow: 2px 2px #222;
     }
     .products-list .product {
         display:inline-block;
         text-align:center;
-        border:.1rem solid #c21924;
+        border:.1rem solid #000000;
         border-radius:.4rem;
         margin:.5rem;
         width:160px;
@@ -186,7 +187,7 @@
             <ul class="products-list">
                 <script id="products-template" type="x-handlebars-template">
                 {{#each this}}
-                    <li class="product" data-index="{{id}}" style="background-image: url('{{image}}'); background-size:cover; background-position:center;">
+                    <li class="product" data-index="{{id}}" style="background-image: url('{{image}}'); background-size:contain; background-repeat: no-repeat; background-position:center;">
                         <a href="#"> 
                         <h2>{{name}}</h2>
                         <p class="product-price">{{price}}&nbsp;€</p>
