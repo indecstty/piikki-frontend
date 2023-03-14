@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="css/jquery-ui.css">
     <link rel="stylesheet" href="css/keyboard.css">
     <link rel="stylesheet" href="css/milligram.min.css">
-    <link rel="stylesheet" href="https://res.cloudinary.com/finnhvman/raw/upload/matter/matter-0.2.2.css">
 
     <style>
     body{
@@ -99,6 +98,50 @@
         font-size:3em;
         font-weight:bold;
     }
+    
+    .button-name{
+        align-items: center;
+        appearance: none;
+        background-color: #c21924;
+        border-radius: 4px;
+        border-width: 0;
+        box-shadow: rgba(45, 35, 66, 0.2) 0 2px 4px,rgba(45, 35, 66, 0.15) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
+        box-sizing: border-box;
+        color: #36395A;
+        cursor: pointer;
+        display: inline-flex;
+        height: 48px;
+        justify-content: center;
+        line-height: 1;
+        list-style: none;
+        overflow: hidden;
+        padding-left: 16px;
+        padding-right: 16px;
+        position: relative;
+        text-align: left;
+        text-decoration: none;
+        transition: box-shadow .15s,transform .15s;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        white-space: nowrap;
+        will-change: box-shadow,transform;
+    }
+
+    .button-name:focus {
+        box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    }
+
+    .button-name:hover {
+        box-shadow: rgba(45, 35, 66, 0.3) 0 4px 8px, rgba(45, 35, 66, 0.2) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+        transform: translateY(-2px);
+    }
+
+    .button-name:active {
+        box-shadow: #D6D6E7 0 3px 7px inset;
+        transform: translateY(2px);
+    }
+
     .button{
         background-color:#c21924;
         border-color:#c21924;
@@ -165,7 +208,7 @@
         </div>
     
         <div class="frontpage page">
-            <h1 class="matter-h1">Lue kortti / Read card</h1>
+            <h1>Lue kortti / Read card</h1>
             <div class="hidden">
                 <form action="#products" method="get">
                     <input type="text" name="card_id" id="card_id" autofocus autocomplete="off">
@@ -202,8 +245,8 @@
             </ul>
             <div class="row">
             <div class="column centered">
-            <a class="matter-button-text" href="#add">Lisää rahaa / Add money</a><br><br>
-            <a class="matter-button-outlined cancel-button" href="index.html">Peruuta / Cancel</a>
+            <a class="button" href="#add">Lisää rahaa / Add money</a><br><br>
+            <a class="button button-outline cancel-button" href="index.html">Peruuta / Cancel</a>
             </div>
             </div>
         </div>
@@ -234,8 +277,8 @@
                     <input type="range" name="count" id="count" class="count-slider" min="1" max="10" value="1">
                     <div class="calculations"><span class="" id="count-value">1</span>&nbsp;kpl/pcs * <span class="" id="price"></span> € =<br></div>
                     <div class="total"><span id="total"></span> €<br></div><br>
-                    <a class="matter-button-text buy-button" href="#buy">Osta / Buy</a><br>
-                    <a class="matter-button-outlined" href="index.html">Peruuta / Cancel</a>
+                    <a class="button buy-button" href="#buy">Osta / Buy</a><br>
+                    <a class="button button-outline" href="index.html">Peruuta / Cancel</a>
                 </div>
             </div>
             
@@ -251,7 +294,7 @@
             <h1>Pyydä hallituslaista / Ask for an Indecs' board member</h1>
             <div class="row">
                 <div class="column">
-                    <a class="matter-button-outlined" href="index.html">Peruuta / Cancel</a>
+                    <a class="button button-outline" href="index.html">Peruuta / Cancel</a>
                 </div>
             </div>
             <div class="hidden">
