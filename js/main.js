@@ -74,29 +74,33 @@ $(function () {
                 
                 $(".loader").addClass("visible");
                 
-                $.getJSON( api_url + "/user.php?callback=?", {
+                $.getJSON(api_url + "/user.php?callback=?", {
                     card_id: $("#card_id").val()
+                }, {
+                    dataType: "jsonp",  // Add dataType as jsonp
+                    jsonpCallback: "callback"  // Replace "callback" with the actual name of the callback function returned by the server
                 })
-                    .done(function(data){
-                        $(".loader").removeClass("visible");
-                        if(data.success){
+                .done(function(data){
+                    $(".loader").removeClass("visible");
+                    if(data.success){
                         user = data;
                         if(user.status == "new" || (user.first_name == "Etunimi" && user.last_name == "Sukunimi")){
                             window.location.hash = 'authorize';
                             return;
                         }
                         renderProductsPage(user);
-                        } else{
-                            var message = {};
-                            message.text = data.text;
-                            message.type = "error";
-                            renderMessagePage(message);
-                        }
-                    })
-                    .fail(function(jqxhr, textStatus, error){
-                        $(".loader").removeClass("visible");
-                        noInternet();
-                    });
+                    } else{
+                        var message = {};
+                        message.text = data.text;
+                        message.type = "error";
+                        renderMessagePage(message);
+                    }
+                })
+                .fail(function(jqxhr, textStatus, error){
+                    $(".loader").removeClass("visible");
+                    noInternet();
+                });
+                
 
 				
 
