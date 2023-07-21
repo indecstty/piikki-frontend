@@ -1,31 +1,38 @@
 $(function () {
     
+    // API URL
     var api_url = "https://indecs.fi/piikki";
-    
+
+    // Variables to store data
     var products;
     var product;
     var user;
     var admin_authorized = false;
     
-    $.getJSON( api_url + "/products.php?callback=?" )
-        .done(function(data){
+    // Fetch products data from API
+    $.getJSON(api_url + "/products.php?callback=?")
+        .done(function (data) {
             products = data.products;
             generateAllProductsHTML(products)
         })
-        .fail(function(jqxhr, textStatus, error){
+        .fail(function (jqxhr, textStatus, error) {
             $(".page").removeClass("visible");
             noInternet();
         });
 
-	$(window).on('hashchange', function(){
+    // Event listener for hashchange
+    $(window).on('hashchange', function () {
 		// On every hash change the render function is called with the new hash.
 		// This is how the navigation of our app happens.
 		render(decodeURI(window.location.hash));
 	});
     
+    // Trigger hashchange event on page load
     $(window).trigger('hashchange');
-    $(window).keypress(function(event){
-        if (event.keyCode === 10 || event.keyCode === 13) 
+
+    // Prevent enter key from submitting form
+    $(window).keypress(function (event) {
+        if (event.keyCode === 10 || event.keyCode === 13)
             event.preventDefault();
     });
 
@@ -265,17 +272,17 @@ $(function () {
         // (the render function hides all pages so we need to show the one we want).
         page.addClass('visible');
         
-	$(window).on('click', function () {
-	  $("#card_id").focus();
-	});
-        
-	$(window).on('keypress', function(event) {
-	  if (event.which === 13 || event.key === 'Enter') {
-	    // Pressed Enter key
-	    window.location.replace('#products');
-	  }
-	});
-	}
+        $(window).on('click', function () {
+        $("#card_id").focus();
+        });
+            
+        $(window).on('keypress', function(event) {
+        if (event.which === 13 || event.key === 'Enter') {
+            // Pressed Enter key
+            window.location.replace('#products');
+        }
+        });
+    }
 
 	function renderProductsPage(data){
 		// Hides and shows products in the All Products Page depending on the data it recieves.
@@ -382,14 +389,18 @@ $(function () {
     }
 	}
     
-    $("#count").on('input', function(){
+    // Event listener for count slider
+    $("#count").on('input', function () {
         checkFunds();
     });
+
     
-    $("#add-funds").on('input', function(){
+    // Event listener for add-funds slider
+    $("#add-funds").on('input', function () {
         $("#add-funds-value").text($("#add-funds").val());
     });
     
+    // Function to check funds and enable/disable buy button
     function checkFunds(){
         $("#count-value").text($("#count").val());
         var total = $("#count").val() * $("#price").text();
@@ -402,6 +413,7 @@ $(function () {
         }
     }
     
+    // Function to handle no internet connection
     function noInternet(){
         var message = {};
         message.text = "Ei internet-yhteyttä / No internet connection";
