@@ -265,14 +265,16 @@ $(function () {
         // (the render function hides all pages so we need to show the one we want).
         page.addClass('visible');
         
-        $(window).click(function(){
-            $("#card_id").focus();
-        });
+	$(window).on('click', function () {
+	  $("#card_id").focus();
+	});
         
-        $(window).keypress(function(event){
-        if (event.keyCode === 10 || event.keyCode === 13) 
-            window.location.hash = '#products';
-        });
+	$(window).on('keypress', function(event) {
+	  if (event.which === 13 || event.key === 'Enter') {
+	    // Pressed Enter key
+	    window.location.replace('#products');
+	  }
+	});
 	}
 
 	function renderProductsPage(data){
