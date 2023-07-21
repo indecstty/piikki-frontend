@@ -10,7 +10,7 @@ $(function () {
     var admin_authorized = false;
     
     // Fetch products data from API
-    $.getJSON(api_url + "/products.php")
+    $.getJSON(api_url + "/products.php?callback=?")
         .done(function (data) {
             products = data.products;
             generateAllProductsHTML(products)
