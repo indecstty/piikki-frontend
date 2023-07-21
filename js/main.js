@@ -197,11 +197,11 @@ $(function () {
                         $(".loader").removeClass("visible");
                         if(data.success){
                             message.success = true;
-                            message.text = "Kiitos ostosta! / Thanks for buying!";
+                            message.text = "Kiitos ostoksesta! / Thank you for your purchase!";
                             renderMessagePage(message);
                         } else{
                             message.text = data.text;
-                            message.type = "Nyt meni joku vikaan :(";
+                            message.type = "error";
                             renderMessagePage(message);
                         }
                     })
@@ -235,7 +235,7 @@ $(function () {
                     .done(function(data){
                         $(".loader").removeClass("visible");
                         if(data.success){
-                            message.text = "Rahat lisätty! / Funds added!";
+                            message.text = "Saldoa lisätty! / Balance added!";
                             message.success = true;
                             renderMessagePage(message);
                         } else{
@@ -438,7 +438,7 @@ $(function () {
         // Function to handle no internet connection
     function noInternet(){
         var message = {};
-        message.text = "Ei internet-yhteyttä / No internet connection";
+        message.text = "Yhteysvirhe. / Connection error.";
         message.success = false;
         renderMessagePage(message);        
     }

@@ -1,112 +1,130 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Piikki</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    
     <link rel="stylesheet" href="css/spinner.css">
     <link rel="stylesheet" href="css/range.css">
     <link rel="stylesheet" href="css/jquery-ui.css">
     <link rel="stylesheet" href="css/keyboard.css">
     <link rel="stylesheet" href="css/milligram.min.css">
-
     <style>
-    body{
-        cursor:none;
+      /* General Styling */
+      body {
+        cursor: default;
         background-color: #cccccc;
-    }
-    .hidden{
-        opacity:0;
-        filter:alpha(opacity=0);
-    }
-    .page{
-        display:none;
-    }
-    .loader{
-        display:none;
-        margin-left:auto;
-        margin-right:auto;
-    }
-    .frontpage h1{
-        margin-left:auto;
-        margin-right:auto;
-        text-align:center;
-        margin-top:3em;
-    }
-    .authorize h1{
-        margin-left:auto;
-        margin-right:auto;
-        text-align:center;
-        margin-top:3em;
-    }
-    .message h1{
-        margin-left:auto;
-        margin-right:auto;
-        text-align:center;
-        margin-top:3em;
-    }
-    .visible{
-        display:block;
-    }
-    .products-list a{
-        color:#c11924;
-        text-shadow: 2px 2px 4px #222;
-    }
-    .products-list .product {
+      }
+
+      /* Hidden Elements */
+      .hidden {
+        opacity: 0;
+        filter: alpha(opacity=0);
+      }
+
+      /* Hidden Pages */
+      .page {
+        display: none;
+      }
+
+      /* Loader Styling */
+      .loader {
+        display: none;
+        margin: 0 auto;
+      }
+
+      /* Centered Headings for Frontpage, Authorize, and Message */
+      .frontpage h1,
+      .authorize h1,
+      .message h1 {
+        margin: 3em auto;
+        text-align: center;
+      }
+
+      /* Visible Elements */
+      .visible {
+        display: block;
+      }
+
+      /* Products List Styling */
+      .products-list a {
+        color: #000000;
+        text-shadow: 2px 2px 4px #ffffff;
+        font-weight: bold;
+      }
+
+      .products-list .product {
         background-color: #ffffff;
-        display:inline-block;
-        text-align:center;
-        border:.1rem solid #000000;
-        border-radius:.4rem;
-        margin:.5rem;
-        width:160px;
-        height:210px;
-        overflow:hidden;
-        padding:.5rem;
-    }
-    .product-price{
-        font-size:3em;
-        text-align:center;
-    }
-    .product a{
-        display:block;
-        height:250px;
-    }
-    .product h2{
-        height:100px;
-        overflow:hidden;
-        
-    }
-    .centered{
-        text-align:center;
-        margin-left:auto;
-        margin-right:auto;
-    }
-    .count-slider{
-        width:100%;
-    }
-    .product-img{
-        width:50%;
-    }
-    .add-funds-slider{
-        width:100%;
-    }
-    .calculations{
-        font-size:2em;
-    }
-    .total{
-        font-size:3em;
-        font-weight:bold;
-    }
-    
-    .button-name{
+        display: inline-block;
+        text-align: center;
+        border: 0.1rem solid #ffffff;
+        border-radius: 0.4rem;
+        margin: 0.5rem;
+        width: 160px;
+        height: 210px;
+        overflow: hidden;
+        padding: 0.5rem;
+      }
+
+      /* Product Price Styling */
+      .product-price {
+        padding-top: 50px; 
+        font-size: 2em; /* Reduce the font size for better readability */
+        text-align: center;
+        margin-top: 10px; /* Add some spacing between product heading and price */
+        font-weight: bold; /* Add bold styling to the price */
+        color: #000000; /* Set a contrasting color for the price */
+        text-shadow: 2px 2px 4px #ffffff;
+      }
+
+      /* Product Link Styling */
+      .product a {
+        display: block;
+        height: 250px;
+      }
+
+      /* Product Heading Styling */
+      .product h2 {
+        height: 50px; /* Decrease the height to allow more text visibility */
+        overflow: hidden;
+        text-overflow: ellipsis; /* Add ellipsis for long product names */
+        white-space: nowrap;
+        font-weight: bold; /* Add bold styling to the price */
+        font-size: 1.4em; /* Increase the font size for better readability */
+        margin-top: 10px; /* Add spacing between the product image and heading */
+        }
+
+      /* Centered Elements */
+      .centered {
+        text-align: center;
+        margin: 0 auto;
+      }
+
+      /* Full-width Sliders */
+      .count-slider,
+      .add-funds-slider {
+        width: 100%;
+      }
+
+      /* Price Calculations Styling */
+      .calculations {
+        font-size: 2em;
+      }
+
+      /* Total Price Styling */
+      .total {
+        font-size: 3em;
+        font-weight: bold;
+      }
+
+      /* Button Styling */
+      .button-name {
         align-items: center;
         appearance: none;
         background-color: #c21924;
         border-radius: 4px;
         border-width: 0;
-        box-shadow: rgba(45, 35, 66, 0.2) 0 2px 4px,rgba(45, 35, 66, 0.15) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
+        box-shadow: rgba(45, 35, 66, 0.2) 0 2px 4px, rgba(45, 35, 66, 0.15) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
         box-sizing: border-box;
         color: #36395A;
         cursor: pointer;
@@ -116,246 +134,263 @@
         line-height: 1;
         list-style: none;
         overflow: hidden;
-        padding-left: 16px;
-        padding-right: 16px;
+        padding: 0 16px;
         position: relative;
         text-align: left;
         text-decoration: none;
-        transition: box-shadow .15s,transform .15s;
+        transition: box-shadow .15s, transform .15s;
         user-select: none;
         -webkit-user-select: none;
         touch-action: manipulation;
         white-space: nowrap;
-        will-change: box-shadow,transform;
-    }
+        will-change: box-shadow, transform;
+      }
 
-    .button-name:focus {
+      /* Button Focus Styling */
+      .button-name:focus {
         box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
-    }
+      }
 
-    .button-name:hover {
+      /* Button Hover Styling */
+      .button-name:hover {
         box-shadow: rgba(45, 35, 66, 0.3) 0 4px 8px, rgba(45, 35, 66, 0.2) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
         transform: translateY(-2px);
-    }
+      }
 
-    .button-name:active {
+      /* Button Active Styling */
+      .button-name:active {
         box-shadow: #D6D6E7 0 3px 7px inset;
         transform: translateY(2px);
-    }
+      }
 
-    .button{
-        background-color:#c21924;
-        border-color:#c21924;
-    }
-    .button.button-outline{
-        background-color:transparent;
-        border-color:#c21924;
-        color:#c21924;
-    }
-    .column{
-        text-align:center;
-        margin-left:auto;
-        margin-right:auto;
-    }
-    .message p{
-        text-align:center;
-    }
-    .names input{
-        width:100%;
-    }
-    .tab-info-left{
-        text-align:right;
-        max-width:30%!important;
-    }
-    .tab-info-right{
-        text-align:left;
-        font-size:2em;
-        max-width:20%!important;
-    }
-    .add-info-left{
-        text-align:right;
-        padding-top:0.7em!important;
-    }
-    .add-info-right{
-        text-align:left;
-        font-size:3em;
-    }
-    .name-column{
-        font-size:2em;
-        text-align:right;
-        overflow:hidden;
-        text-overflow:ellipsis;
-        white-space:nowrap;
-    }
-    label{
-        display:inline-block;
-    }
-    #is_admin{
-        width:10%;
-    }
+      /* Red Button */
+      .button {
+        background-color: #c21924;
+        border-color: #c21924;
+      }
+
+      /* Red Button with Outline */
+      .button.button-outline {
+        background-color: transparent;
+        border-color: #c21924;
+        color: #c21924;
+      }
+
+      /* Centered Columns */
+      .column {
+        text-align: center;
+        margin: 0 auto;
+      }
+
+      /* Centered Paragraph in Message */
+      .message p {
+        text-align: center;
+      }
+
+      /* Full-width Input Fields in Names */
+      .names input {
+        width: 100%;
+      }
+
+      /* Right-aligned Tab Information */
+      .tab-info-left {
+        text-align: right;
+        max-width: 30% !important;
+      }
+
+      /* Left-aligned Tab Information */
+      .tab-info-right {
+        text-align: left;
+        font-size: 2em;
+        max-width: 20% !important;
+      }
+
+      /* Right-aligned Additional Information */
+      .add-info-left {
+        text-align: right;
+        padding-top: 0.7em !important;
+      }
+
+      /* Left-aligned Additional Information */
+      .add-info-right {
+        text-align: left;
+        font-size: 3em;
+      }
+
+      /* Right-aligned Name Column */
+      .name-column {
+        font-size: 2em;
+        text-align: right;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      /* Inline Labels */
+      label {
+        display: inline-block;
+      }
+
+      /* Admin Checkbox */
+      #is_admin {
+        width: 10%;
+      }
     </style>
-    
     <script src="js/handlebars.min-latest.js"></script>
     <script src="js/jquery-3.7.0.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/jquery.keyboard.js"></script>
     <script src="js/jquery.keyboard.extension-all.js"></script>
     <script src="js/ms-Swedish.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container main-content">
-        <div class="loader">
-        Ladataan... / Loading...
+      <div class="loader"> Ladataan... / Loading... </div>
+      <div class="frontpage page">
+        <h1>Lue kortti / Read card</h1>
+        <div class="hidden">
+          <form action="#products" method="get">
+            <input type="text" name="card_id" id="card_id" autofocus autocomplete="off">
+            <input class="button-primary" type="submit" value="Send">
+          </form>
         </div>
-    
-        <div class="frontpage page">
-            <h1>Lue kortti / Read card</h1>
-            <div class="hidden">
-                <form action="#products" method="get">
-                    <input type="text" name="card_id" id="card_id" autofocus autocomplete="off">
-                    <input class="button-primary" type="submit" value="Send">
-                </form>
+      </div>
+      <div class="products page">
+        <div class="row names">
+          <div class="column name-column">
+            <span class="name"></span>
+          </div>
+          <div class="column tab-info-left"> Piikissä tällä hetkellä: <br> Current funds: </div>
+          <div class="column tab-info-right">
+            <div class="tab-info">
+              <span class="funds"></span>&nbsp;€
             </div>
+          </div>
         </div>
-        
-        <div class="products page">
-            <div class="row names">
-                <div class="column name-column">
-                    <span class="name"></span>
-                </div>
-                <div class="column tab-info-left">
-                    Piikissä tällä hetkellä:<br>
-                    Current funds:
-                </div>
-                <div class="column tab-info-right">
-                    <div class="tab-info"><span class="funds"></span>&nbsp;€</div>
-                </div>
-            </div>
-            
-            <ul class="products-list">
-                <script id="products-template" type="x-handlebars-template">
-                {{#each this}}
-                    <li class="product" data-index="{{id}}" style="background-image: url('{{image}}'); background-size:contain; background-repeat: no-repeat; background-position:center;">
-                        <a href="#"> 
-                        <h2>{{name}}</h2>
-                        <p class="product-price">{{price}}&nbsp;€</p>
-                        </a>
-                    </li>
-                {{/each}}
-                </script>
-            </ul>
-            <div class="row">
-            <div class="column centered">
-            <a class="button" href="#add">Lisää rahaa / Add money</a><br><br>
+        <ul class="products-list">
+          <script id="products-template" type="x-handlebars-template">
+            {{#each this}}
+              <li class="product" data-index="{{id}}" style="background-image: url('{{image}}'); background-size:contain; background-repeat: no-repeat; background-position:center;">
+                <a href="#">
+                  <h2>{{name}}</h2>
+                  <p class="product-price">{{price}}&nbsp;€</p>
+                </a>
+              </li>
+            {{/each}}
+          </script>
+        </ul>
+        <div class="row">
+          <div class="column centered">
+            <a class="button" href="#add">Lisää rahaa / Add money</a>
+            <br>
+            <br>
             <a class="button button-outline cancel-button" href="index.html">Peruuta / Cancel</a>
-            </div>
-            </div>
+          </div>
         </div>
-        
-        <div class="single-product page">
-            <div class="row names">
-                <div class="column name-column">
-                    <span class="name"></span>
-                </div>
-                <div class="column tab-info-left">
-                    Piikissä tällä hetkellä:<br>
-                    Current funds:
-                </div>
-                <div class="column tab-info-right">
-                    <div class="tab-info"><span class="funds"></span>&nbsp;€</div>
-                </div>
+      </div>
+      <div class="single-product page">
+        <div class="row names">
+          <div class="column name-column">
+            <span class="name"></span>
+          </div>
+          <div class="column tab-info-left"> Piikissä tällä hetkellä: <br> Current funds: </div>
+          <div class="column tab-info-right">
+            <div class="tab-info">
+              <span class="funds"></span>&nbsp;€
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="column">
+            <div class="product">
+              <img src="" class="product-img">
+              <h3></h3>
+              <p></p>
+            </div>
+          </div>
+          <div class="column">
+            <input type="range" name="count" id="count" class="count-slider" min="1" max="10" value="1">
+            <div class="calculations">
+              <span class="" id="count-value">1</span>&nbsp;kpl/pcs * <span class="" id="price"></span> € = <br>
+            </div>
+            <div class="total">
+              <span id="total"></span> € <br>
             </div>
             <br>
+            <a class="button buy-button" href="#buy">Osta / Buy</a>
+            <br>
+            <a class="button button-outline" href="index.html">Peruuta / Cancel</a>
+          </div>
+        </div>
+      </div>
+      <div class="message page">
+        <h1></h1>
+        <p></p>
+        <div class="centered">
+          <a class="button button-outline" href="index.html">Alkuun / To Start</a>
+        </div>
+      </div>
+      <div class="authorize page">
+        <h1>Pyydä hallituslaista / Ask for an Indecs' board member</h1>
+        <div class="row">
+          <div class="column">
+            <a class="button button-outline" href="index.html">Peruuta / Cancel</a>
+          </div>
+        </div>
+        <div class="hidden">
+          <form action="#add" method="get">
+            <input type="text" name="admin_id" id="admin_id" autocomplete="off">
+            <input class="button-primary" type="submit" value="Send">
+          </form>
+        </div>
+      </div>
+      <div class="add-funds page">
+        <br>
+        <div class="row names">
+          <div class="column">
+            <input type="text" class="name-input" name="first_name" id="first_name">
+          </div>
+          <div class="column">
+            <input type="text" class="name-input" name="last_name" id="last_name">
+          </div>
+          <div class="column">
+            <input type="checkbox" name="is_admin" id="is_admin">&nbsp; <label for="is_admin">Admin</label>
+          </div>
+          <div class="column tab-info-left"> Piikissä: <br> Current funds: </div>
+          <div class="column tab-info-right">
+            <div class="tab-info">
+              <span class="funds"></span>&nbsp;€
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <input type="range" name="count" id="add-funds" class="add-funds-slider" min="0" max="50" value="10">
+        <br>
+        <br>
+        <div class="row">
+          <div class="column">
             <div class="row">
-                <div class="column">
-                    <div class="product">
-                        <img src="" class="product-img">
-                        <h3></h3>
-                        <p></p>
-                    </div>
+              <div class="column add-info-left"> Lisättävä summa: <br> To be added: </div>
+              <div class="column add-info-right">
+                <div class="add-funds-value">
+                  <span class="" id="add-funds-value">10</span>&nbsp;€
                 </div>
-                <div class="column">
-                    <input type="range" name="count" id="count" class="count-slider" min="1" max="10" value="1">
-                    <div class="calculations"><span class="" id="count-value">1</span>&nbsp;kpl/pcs * <span class="" id="price"></span> € =<br></div>
-                    <div class="total"><span id="total"></span> €<br></div><br>
-                    <a class="button buy-button" href="#buy">Osta / Buy</a><br>
-                    <a class="button button-outline" href="index.html">Peruuta / Cancel</a>
-                </div>
+              </div>
             </div>
-            
+          </div>
+          <div class="column">
+            <a class="button" href="#process">Lisää rahaa / Add funds</a>
+            <br>
+            <a class="button button-outline" href="index.html">Peruuta / Cancel</a>
+          </div>
         </div>
-        
-        <div class="message page">
-            <h1></h1>
-            <p></p>
-            <div class="centered"><a class="button button-outline" href="index.html">Alkuun / To Start</a></div>
-        </div>
-        
-        <div class="authorize page">
-            <h1>Pyydä hallituslaista / Ask for an Indecs' board member</h1>
-            <div class="row">
-                <div class="column">
-                    <a class="button button-outline" href="index.html">Peruuta / Cancel</a>
-                </div>
-            </div>
-            <div class="hidden">
-                <form action="#add" method="get">
-                    <input type="text" name="admin_id" id="admin_id" autocomplete="off">
-                    <input class="button-primary" type="submit" value="Send">
-                </form>
-            </div>
-        </div>
-        
-        <div class="add-funds page">
-            <br>
-            <div class="row names">
-                <div class="column">
-                    <input type="text" class="name-input" name="first_name" id="first_name">
-                </div>
-                <div class="column">
-                    <input type="text" class="name-input" name="last_name" id="last_name">
-                </div>
-                <div class="column">
-                    <input type="checkbox" name="is_admin" id="is_admin">&nbsp;<label for="is_admin">Admin</label>
-                </div>
-                <div class="column tab-info-left">
-                    Piikissä:<br>
-                    Current funds:
-                </div>
-                <div class="column tab-info-right">
-                    <div class="tab-info"><span class="funds"></span>&nbsp;€</div>
-                </div>
-            </div>
-            <br>
-            <br>
-            <br>
-            <input type="range" name="count" id="add-funds" class="add-funds-slider" min="0" max="50" value="10">
-            <br>
-            <br>
-            <div class="row">
-                <div class="column">
-                    <div class="row">
-                        <div class="column add-info-left">
-                            Lisättävä summa:<br>
-                            To be added:
-                        </div>
-                        <div class="column add-info-right">
-                            <div class="add-funds-value"><span class="" id="add-funds-value">10</span>&nbsp;€</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <a class="button" href="#process">Lisää rahaa / Add funds</a><br>
-                    <a class="button button-outline" href="index.html">Peruuta / Cancel</a>
-                </div>
-            </div>
-            
-            <p>HUOM! Lisätyt rahat kytketään korttiisi. Jos hukkaat tai rikot kortin, menetät piikkiin lisätyt rahat. Rahoja ei voi nostaa piikistä pois.</p>
-            <p>NOTE! Money you'll add will be connected to your card. If you lose or break the card, you'll lose your money on the tab. Added money cannot be withdrawn from the tab.</p>
-            
-            <script src="js/keyboard-config.js"></script>
-        </div>
-        
+        <p>HUOM! Lisätyt rahat kytketään korttiisi. Jos hukkaat tai rikot kortin, menetät piikkiin lisätyt rahat. Rahoja ei voi nostaa piikistä pois.</p>
+        <p>NOTE! Money you'll add will be connected to your card. If you lose or break the card, you'll lose your money on the tab. Added money cannot be withdrawn from the tab.</p>
+        <script src="js/keyboard-config.js"></script>
+      </div>
     </div>
-</body>
+  </body>
 </html>
