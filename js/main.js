@@ -36,6 +36,19 @@ $(function () {
             event.preventDefault();
     });
 
+     // Event listener for form submission
+     $('form').on('submit', function (event) {
+        event.preventDefault(); // Prevent default form submission behavior
+
+        var cardId = $("#card_id").val();
+
+        if (!cardId || !$.isNumeric(cardId)) {
+            $(location).attr('href', 'index.html');
+            return;
+        }
+
+        window.location.hash = 'products'; // Change the window location to the products page with the hash
+    });    
 	function render(url) {
 
 		// Get the keyword from the url.
@@ -413,7 +426,7 @@ $(function () {
         }
     }
     
-    // Function to handle no internet connection
+        // Function to handle no internet connection
     function noInternet(){
         var message = {};
         message.text = "Ei internet-yhteyttä / No internet connection";
