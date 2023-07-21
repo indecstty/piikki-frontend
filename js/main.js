@@ -9,17 +9,16 @@ $(function () {
     var user;
     var admin_authorized = false;
     
-	// Fetch products data from API
-	$.getJSON(api_url + "/products.php")
-	    .done(function (data) {
-	        products = data.products;
-	        generateAllProductsHTML(products)
-	    })
-	    .fail(function (jqxhr, textStatus, error) {
-	        $(".page").removeClass("visible");
-	        noInternet();
-	    });
-
+    // Fetch products data from API
+    $.getJSON(api_url + "/products.php?callback=?")
+        .done(function (data) {
+            products = data.products;
+            generateAllProductsHTML(products)
+        })
+        .fail(function (jqxhr, textStatus, error) {
+            $(".page").removeClass("visible");
+            noInternet();
+        });
 
     // Event listener for hashchange
     $(window).on('hashchange', function () {
