@@ -74,35 +74,30 @@ $(function () {
                 
                 $(".loader").addClass("visible");
                 
+                // Fetch user data from API
                 $.getJSON(api_url + "/user.php?callback=?", {
                     card_id: $("#card_id").val()
-                }, {
-                    dataType: "jsonp",  // Add dataType as jsonp
-                    jsonpCallback: "callback"  // Replace "callback" with the actual name of the callback function returned by the server
                 })
-                .done(function(data){
+                .done(function(data) {
                     $(".loader").removeClass("visible");
-                    if(data.success){
-                        user = data;
-                        if(user.status == "new" || (user.first_name == "Etunimi" && user.last_name == "Sukunimi")){
+                    if (data.success) {
+                        user = data; // Store the user information in the 'user' variable
+                        if (user.status == "new" || (user.first_name == "Etunimi" && user.last_name == "Sukunimi")) {
                             window.location.hash = 'authorize';
                             return;
                         }
-                        renderProductsPage(user);
-                    } else{
+                        renderProductsPage(); // Render the products page after fetching user data
+                    } else {
                         var message = {};
                         message.text = data.text;
                         message.type = "error";
                         renderMessagePage(message);
                     }
                 })
-                .fail(function(jqxhr, textStatus, error){
+                .fail(function(jqxhr, textStatus, error) {
                     $(".loader").removeClass("visible");
                     noInternet();
                 });
-                
-
-				
 
 			},
 
@@ -301,25 +296,19 @@ $(function () {
         });
     }
 
-    function renderProductsPage(data) {
-        // Hides and shows products in the All Products Page depending on the data it receives.
-    
+    function renderProductsPage() {
         var page = $('.products');
     
-        if (data.success) {
-            page.find('.name').text(data.first_name + " " + data.last_name);
-            page.find('.funds').text(data.balance);
-        } else {
-            // If the API call is not successful, handle the error appropriately.
-            var errorMessage = "Error: Unable to fetch user data.";
-            // Display an error message on the page
-            page.find('.error-message').text(errorMessage);
+        // Display the user's name and balance
+        if (user) {
+            page.find('.name').text(user.first_name + " " + user.last_name);
+            page.find('.funds').text(user.balance);
         }
     
         // Show the page itself.
-        // (the render function hides all pages so we need to show the one we want).
         page.addClass('visible');
     }
+    
     
 
 
