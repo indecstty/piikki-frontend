@@ -11,14 +11,16 @@ $(function () {
     
     // Fetch products data from API
     $.getJSON(api_url + "/products.php?callback=?")
-        .done(function (data) {
-            products = data.products;
-            generateAllProductsHTML(products)
-        })
-        .fail(function (jqxhr, textStatus, error) {
-            $(".page").removeClass("visible");
-            noInternet();
-        });
+    .done(function (data) {
+        products = data.products;
+        renderProductsPage(data); // Pass the data to the renderProductsPage function
+        generateAllProductsHTML(products);
+    })
+    .fail(function (jqxhr, textStatus, error) {
+        $(".page").removeClass("visible");
+        noInternet();
+    });
+
 
     // Event listener for hashchange
     $(window).on('hashchange', function () {
@@ -302,16 +304,13 @@ $(function () {
         var page = $('.products');
     
         if (data.success) {
-            // Update the user information on the frontend
             page.find('.name').text(data.first_name + " " + data.last_name);
             page.find('.funds').text(data.balance);
         } else {
             // If the API call is not successful, handle the error appropriately.
-            // For example, you can show an error message or redirect to an error page.
-            // For now, let's log the error to the console.
-            console.log("Error fetching user data:", data);
-            // You may also display an error message on the page or redirect the user to an error page.
-            // Example: renderErrorMessage(data.text);
+            var errorMessage = "Error: Unable to fetch user data.";
+            // Display an error message on the page
+            page.find('.error-message').text(errorMessage);
         }
     
         // Show the page itself.
@@ -319,6 +318,8 @@ $(function () {
         page.addClass('visible');
     }
     
+
+
 	function renderSingleProductPage(index, data, user){
 		// Shows the Single Product Page with appropriate data.
         
