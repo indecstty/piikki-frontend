@@ -201,7 +201,7 @@ $(function () {
                             renderMessagePage(message);
                         } else{
                             message.text = data.text;
-                            message.type = "error";
+                            message.type = "Nyt meni joku vikaan :(";
                             renderMessagePage(message);
                         }
                     })
@@ -301,21 +301,26 @@ $(function () {
         });
     }
 
-	function renderProductsPage(data){
-		// Hides and shows products in the All Products Page depending on the data it recieves.
-        
+    function renderProductsPage(data) {
+        // Hides and shows products in the All Products Page depending on the data it receives.
+    
         var page = $('.products');
-
-        if(data){
-          page.find('.name').text(data.first_name + " " + data.last_name);
-          page.find('.funds').text(data.balance);
+    
+        if (data.success) {
+            page.find('.name').text(data.first_name + " " + data.last_name);
+            page.find('.funds').text(data.balance);
+        } else {
+            // If the API call is not successful, handle the error appropriately.
+            var errorMessage = "Error: Unable to fetch user data.";
+            // Display an error message on the page
+            page.find('.error-message').text(errorMessage);
         }
-        
+    
         // Show the page itself.
         // (the render function hides all pages so we need to show the one we want).
         page.addClass('visible');
-        
-	}
+    }
+    
 
 
 	function renderSingleProductPage(index, data, user){
