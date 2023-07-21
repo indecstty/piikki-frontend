@@ -1,4 +1,5 @@
 $(function () {
+    
     // API URL
     var api_url = "https://indecs.fi/piikki";
 
@@ -7,41 +8,40 @@ $(function () {
     var product;
     var user;
     var admin_authorized = false;
+    
+	// Fetch products data from API
+	$.getJSON(api_url + "/products.php")
+	    .done(function (data) {
+	        products = data.products;
+	        generateAllProductsHTML(products)
+	    })
+	    .fail(function (jqxhr, textStatus, error) {
+	        $(".page").removeClass("visible");
+	        noInternet();
+	    });
 
-    // Constants for elements
-    var $cardIdInput = $("#card_id");
-    var $adminIdInput = $("#admin_id");
-
-    // Fetch products data from API
-    $.getJSON(api_url + "/products.php")
-        .done(function (data) {
-            products = data.products;
-            generateAllProductsHTML(products)
-        })
-        .fail(function (jqxhr, textStatus, error) {
-            $(".page").removeClass("visible");
-            noInternet();
-        });
 
     // Event listener for hashchange
     $(window).on('hashchange', function () {
-        render(decodeURI(window.location.hash));
-    });
-
+		// On every hash change the render function is called with the new hash.
+		// This is how the navigation of our app happens.
+		render(decodeURI(window.location.hash));
+	});
+    
     // Trigger hashchange event on page load
     $(window).trigger('hashchange');
 
     // Prevent enter key from submitting form
-    $(window).on('keypress', function (event) {
+    $(window).keypress(function (event) {
         if (event.keyCode === 10 || event.keyCode === 13)
             event.preventDefault();
     });
 
-    // Event listener for form submission
-    $('form').on('submit', function (event) {
+     // Event listener for form submission
+     $('form').on('submit', function (event) {
         event.preventDefault(); // Prevent default form submission behavior
 
-        var cardId = $cardIdInput.val();
+        var cardId = $("#card_id").val();
 
         if (!cardId || !$.isNumeric(cardId)) {
             $(location).attr('href', 'index.html');
@@ -49,7 +49,7 @@ $(function () {
         }
 
         window.location.hash = 'products'; // Change the window location to the products page with the hash
-    });
+    });    
 	function render(url) {
 
 		// Get the keyword from the url.
