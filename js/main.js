@@ -296,22 +296,29 @@ $(function () {
         });
     }
 
-    function renderProductsPage() {
+    function renderProductsPage(data) {
+        // Hides and shows products in the All Products Page depending on the data it receives.
+    
         var page = $('.products');
     
-        // Display the user's name and balance
-        if (user) {
-            page.find('.name').text(user.first_name + " " + user.last_name);
-            page.find('.funds').text(user.balance);
+        if (data.success) {
+            // Update the user information on the frontend
+            page.find('.name').text(data.first_name + " " + data.last_name);
+            page.find('.funds').text(data.balance);
+        } else {
+            // If the API call is not successful, handle the error appropriately.
+            // For example, you can show an error message or redirect to an error page.
+            // For now, let's log the error to the console.
+            console.log("Error fetching user data:", data);
+            // You may also display an error message on the page or redirect the user to an error page.
+            // Example: renderErrorMessage(data.text);
         }
     
         // Show the page itself.
+        // (the render function hides all pages so we need to show the one we want).
         page.addClass('visible');
     }
     
-    
-
-
 	function renderSingleProductPage(index, data, user){
 		// Shows the Single Product Page with appropriate data.
         
