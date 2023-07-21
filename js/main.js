@@ -302,13 +302,16 @@ $(function () {
         var page = $('.products');
     
         if (data.success) {
+            // Update the user information on the frontend
             page.find('.name').text(data.first_name + " " + data.last_name);
             page.find('.funds').text(data.balance);
         } else {
             // If the API call is not successful, handle the error appropriately.
-            var errorMessage = "Error: Unable to fetch user data.";
-            // Display an error message on the page
-            page.find('.error-message').text(errorMessage);
+            // For example, you can show an error message or redirect to an error page.
+            // For now, let's log the error to the console.
+            console.log("Error fetching user data:", data);
+            // You may also display an error message on the page or redirect the user to an error page.
+            // Example: renderErrorMessage(data.text);
         }
     
         // Show the page itself.
@@ -316,8 +319,6 @@ $(function () {
         page.addClass('visible');
     }
     
-
-
 	function renderSingleProductPage(index, data, user){
 		// Shows the Single Product Page with appropriate data.
         
