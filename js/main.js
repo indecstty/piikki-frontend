@@ -1,5 +1,4 @@
 $(function () {
-    
     // API URL
     var api_url = "https://indecs.fi/piikki";
 
@@ -8,12 +7,12 @@ $(function () {
     var product;
     var user;
     var admin_authorized = false;
-    
+
     // Fetch products data from API
-    $.getJSON(api_url + "/products.php?callback=?")
+    $.getJSON(api_url + "/products.php")
         .done(function (data) {
             products = data.products;
-            generateAllProductsHTML(products)
+            generateAllProductsHTML(products);
         })
         .fail(function (jqxhr, textStatus, error) {
             $(".page").removeClass("visible");
@@ -22,22 +21,20 @@ $(function () {
 
     // Event listener for hashchange
     $(window).on('hashchange', function () {
-		// On every hash change the render function is called with the new hash.
-		// This is how the navigation of our app happens.
-		render(decodeURI(window.location.hash));
-	});
-    
+        render(decodeURI(window.location.hash));
+    });
+
     // Trigger hashchange event on page load
     $(window).trigger('hashchange');
 
     // Prevent enter key from submitting form
-    $(window).keypress(function (event) {
+    $(window).on('keypress', function (event) {
         if (event.keyCode === 10 || event.keyCode === 13)
             event.preventDefault();
     });
 
-     // Event listener for form submission
-     $('form').on('submit', function (event) {
+    // Event listener for form submission
+    $('form').on('submit', function (event) {
         event.preventDefault(); // Prevent default form submission behavior
 
         var cardId = $("#card_id").val();
@@ -48,8 +45,9 @@ $(function () {
         }
 
         window.location.hash = 'products'; // Change the window location to the products page with the hash
-    });    
-	function render(url) {
+    });
+
+    function render(url) {
 
 		// Get the keyword from the url.
 		var temp = url.split('/')[0];
