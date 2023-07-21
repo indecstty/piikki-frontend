@@ -11,16 +11,14 @@ $(function () {
     
     // Fetch products data from API
     $.getJSON(api_url + "/products.php?callback=?")
-    .done(function (data) {
-        products = data.products;
-        renderProductsPage(data); // Pass the data to the renderProductsPage function
-        generateAllProductsHTML(products);
-    })
-    .fail(function (jqxhr, textStatus, error) {
-        $(".page").removeClass("visible");
-        noInternet();
-    });
-
+        .done(function (data) {
+            products = data.products;
+            generateAllProductsHTML(products)
+        })
+        .fail(function (jqxhr, textStatus, error) {
+            $(".page").removeClass("visible");
+            noInternet();
+        });
 
     // Event listener for hashchange
     $(window).on('hashchange', function () {
@@ -76,30 +74,35 @@ $(function () {
                 
                 $(".loader").addClass("visible");
                 
-                // Fetch user data from API
                 $.getJSON(api_url + "/user.php?callback=?", {
                     card_id: $("#card_id").val()
+                }, {
+                    dataType: "jsonp",  // Add dataType as jsonp
+                    jsonpCallback: "callback"  // Replace "callback" with the actual name of the callback function returned by the server
                 })
-                .done(function(data) {
+                .done(function(data){
                     $(".loader").removeClass("visible");
-                    if (data.success) {
-                        user = data; // Store the user information in the 'user' variable
-                        if (user.status == "new" || (user.first_name == "Etunimi" && user.last_name == "Sukunimi")) {
+                    if(data.success){
+                        user = data;
+                        if(user.status == "new" || (user.first_name == "Etunimi" && user.last_name == "Sukunimi")){
                             window.location.hash = 'authorize';
                             return;
                         }
-                        renderProductsPage(); // Render the products page after fetching user data
-                    } else {
+                        renderProductsPage(user);
+                    } else{
                         var message = {};
                         message.text = data.text;
                         message.type = "error";
                         renderMessagePage(message);
                     }
                 })
-                .fail(function(jqxhr, textStatus, error) {
+                .fail(function(jqxhr, textStatus, error){
                     $(".loader").removeClass("visible");
                     noInternet();
                 });
+                
+
+				
 
 			},
 
