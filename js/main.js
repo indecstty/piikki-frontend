@@ -1,54 +1,53 @@
 $(function () {
-    
+
     // API URL
-    var api_url = "https://indecs.fi/piikki";
-
+    const api_url = "https://indecs.fi/piikki";
+  
     // Variables to store data
-    var products;
-    var product;
-    var user;
-    var admin_authorized = false;
-    
+    let products;
+    let product;
+    let user;
+    let admin_authorized = false;
+  
     // Fetch products data from API
-    $.getJSON(api_url + "/products.php?callback=?")
-        .done(function (data) {
-            products = data.products;
-            generateAllProductsHTML(products)
-        })
-        .fail(function (jqxhr, textStatus, error) {
-            $(".page").removeClass("visible");
-            noInternet();
-        });
-
+    $.getJSON(`${api_url}/products.php?callback=?`)
+      .done(function (data) {
+        products = data.products;
+        generateAllProductsHTML(products);
+      })
+      .fail(function (jqxhr, textStatus, error) {
+        $(".page").removeClass("visible");
+        noInternet();
+      });
+  
     // Event listener for hashchange
     $(window).on('hashchange', function () {
-		// On every hash change the render function is called with the new hash.
-		// This is how the navigation of our app happens.
-		render(decodeURI(window.location.hash));
-	});
-    
+      render(decodeURI(window.location.hash));
+    });
+  
     // Trigger hashchange event on page load
     $(window).trigger('hashchange');
-
+  
     // Prevent enter key from submitting form
-    $(window).keypress(function (event) {
-        if (event.keyCode === 10 || event.keyCode === 13)
-            event.preventDefault();
+    $(window).on('keypress', function (event) {
+      if (event.keyCode === 10 || event.keyCode === 13)
+        event.preventDefault();
+    });
+  
+    // Event listener for form submission
+    $('form').on('submit', function (event) {
+      event.preventDefault(); // Prevent default form submission behavior
+  
+      const cardId = $("#card_id").val();
+  
+      if (!cardId || !$.isNumeric(cardId)) {
+        $(location).attr('href', 'index.html');
+        return;
+      }
+  
+      window.location.hash = 'products'; // Change the window location to the products page with the hash
     });
 
-     // Event listener for form submission
-     $('form').on('submit', function (event) {
-        event.preventDefault(); // Prevent default form submission behavior
-
-        var cardId = $("#card_id").val();
-
-        if (!cardId || !$.isNumeric(cardId)) {
-            $(location).attr('href', 'index.html');
-            return;
-        }
-
-        window.location.hash = 'products'; // Change the window location to the products page with the hash
-    });    
 	function render(url) {
 
 		// Get the keyword from the url.
@@ -435,12 +434,11 @@ $(function () {
         }
     }
     
-        // Function to handle no internet connection
-    function noInternet(){
-        var message = {};
-        message.text = "Yhteysvirhe. / Connection error.";
-        message.success = false;
-        renderMessagePage(message);        
-    }
-
+  function noInternet() {
+    const message = {
+      text: "Yhteysvirhe. / Connection error.",
+      success: false,
+    };
+    renderMessagePage(message);
+  }
 });
