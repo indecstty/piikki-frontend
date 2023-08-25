@@ -157,6 +157,15 @@ body {
   background-color: #c21924;
   border-color: #c21924;
 }
+.centered-button {
+  text-align: center;
+  margin-top: 20px; /* Adjust the margin-top value as needed */
+}
+
+.centered-button .button {
+  display: inline-block;
+  margin-top: 10px; /* Adjust the margin-top value as needed */
+}
 
 /* Red Button with Outline */
 .button.button-outline {

@@ -1,55 +1,63 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Piikki</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/spinner.css">
-    <link rel="stylesheet" href="css/range.css">
-    <link rel="stylesheet" href="css/jquery-ui.css">
-    <link rel="stylesheet" href="css/keyboard.css">
-    <link rel="stylesheet" href="css/milligram.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script src="js/handlebars.min-latest.js"></script>
-    <script src="js/jquery-3.7.0.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/jquery.keyboard.js"></script>
-    <script src="js/jquery.keyboard.extension-all.js"></script>
-    <script src="js/ms-Swedish.js"></script>
-  </head>
-  <body>
-    <input type="text" id="card_hash_input" style="position: absolute; top: -9999px; left: -9999px;">
-    <div class="container main-content">
-      <div class="loader">
-        Ladataan / Loading
+
+<head>
+  <title>Piikki</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/spinner.css">
+  <link rel="stylesheet" href="css/range.css">
+  <link rel="stylesheet" href="css/jquery-ui.css">
+  <link rel="stylesheet" href="css/keyboard.css">
+  <link rel="stylesheet" href="css/milligram.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
+  <script src="js/handlebars.min-latest.js"></script>
+  <script src="js/jquery-3.7.0.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/jquery.keyboard.js"></script>
+  <script src="js/jquery.keyboard.extension-all.js"></script>
+  <script src="js/ms-Swedish.js"></script>
+</head>
+
+<body>
+  <div class="container main-content">
+    <div class="loader">
+      Ladataan / Loading
+    </div>
+    <div class="frontpage page">
+
+      <h1>Lue kortti. Read a card.</h1>
+      <div class="hidden">
+        <form action="#products" method="get">
+          <input type="text" name="card_id" id="card_id" autofocus autocomplete="off">
+          <input class="button-primary" type="submit" value="Send">
+        </form>
       </div>
-      <div class="frontpage page">
-        
-        <h1>Lue kortti. Read a card.</h1>
-        <div class="hidden">
-          <form action="#products" method="get">
-            <input type="text" name="card_id" id="card_id" autofocus autocomplete="off">
-            <input class="button-primary" type="submit" value="Send">
-          </form>
+      <!-- Add the centered button here -->
+      <div class="centered-button">
+        <a class="button" id="activate-button" href="#">Aktivoi lukija. Activate card reader.</a>
+      </div>
+    </div>
+
+  </div>
+  <div class="products page">
+    <div class="row names">
+      <div class="column name-column">
+        <span class="name"></span>
+      </div>
+      <div class="column tab-info-left"> Saldoa tällä hetkellä: <br> Current balance: </div>
+      <div class="column tab-info-right">
+        <div class="tab-info">
+          <span class="funds"></span>&nbsp;€
         </div>
       </div>
-      <div class="products page">
-        <div class="row names">
-          <div class="column name-column">
-            <span class="name"></span>
-          </div>
-          <div class="column tab-info-left"> Saldoa tällä hetkellä: <br> Current balance: </div>
-          <div class="column tab-info-right">
-            <div class="tab-info">
-              <span class="funds"></span>&nbsp;€
-            </div>
-          </div>
-        </div>
-        <ul class="products-list">
-          <script id="products-template" type="x-handlebars-template">
+    </div>
+    <ul class="products-list">
+      <script id="products-template" type="x-handlebars-template">
             {{#each this}}
               <li class="product" data-index="{{id}}" style="background-image: url('{{image}}'); background-size:contain; background-repeat: no-repeat; background-position:center;">
                 <a href="#">
@@ -59,119 +67,128 @@
               </li>
             {{/each}}
           </script>
-        </ul>
-        <div class="row">
-          <div class="column centered">
-            <a class="button" href="#add">Lisää rahaa / Add money</a>
-            <br>
-            <br>
-            <a class="button button-outline cancel-button" href="index.html">Peruuta / Cancel</a>
-          </div>
-        </div>
-      </div>
-      <div class="single-product page">
-        <div class="row names">
-          <div class="column name-column">
-            <span class="name"></span>
-          </div>
-          <div class="column tab-info-left"> Saldoa tällä hetkellä: <br> Current balance: </div>
-          <div class="column tab-info-right">
-            <div class="tab-info">
-              <span class="funds"></span>&nbsp;€
-            </div>
-          </div>
-        </div>
-        <br>
-        <div class="row">
-          <div class="column">
-            <div class="product">
-              <img src="" class="product-img" width="150">
-              <h3></h3>
-              <p></p>
-            </div>
-          </div>
-          <div class="column">
-            <input type="range" name="count" id="count" class="count-slider" min="1" max="10" value="1">
-            <div class="calculations">
-              <span class="" id="count-value">1</span>&nbsp;kpl/pcs * <span class="" id="price"></span> € = <br>
-            </div>
-            <div class="total">
-              <span id="total"></span> € <br>
-            </div>
-            <br>
-            <a class="button buy-button" href="#buy">Osta / Buy</a>
-            <br>
-            <a class="button button-outline" href="index.html">Peruuta / Cancel</a>
-          </div>
-        </div>
-      </div>
-      <div class="message page">
-        <h1></h1>
-        <p></p>
-        <div class="centered">
-          <a class="button button-outline" href="index.html">Alkuun / To Start</a>
-        </div>
-      </div>
-      <div class="authorize page">
-        <h1>Pyydä hallituslaista / Ask for an Indecs' board member</h1>
-        <div class="row">
-          <div class="column">
-            <a class="button button-outline" href="index.html">Peruuta / Cancel</a>
-          </div>
-        </div>
-        <div class="hidden">
-          <form action="#add" method="get">
-            <input type="text" name="admin_id" id="admin_id" autocomplete="off">
-            <input class="button-primary" type="submit" value="Send">
-          </form>
-        </div>
-      </div>
-      <div class="add-funds page">
-        <br>
-        <div class="row names">
-          <div class="column">
-            <input type="text" class="name-input" name="first_name" id="first_name">
-          </div>
-          <div class="column">
-            <input type="text" class="name-input" name="last_name" id="last_name">
-          </div>
-          <div class="column">
-            <input type="checkbox" name="is_admin" id="is_admin">&nbsp; <label for="is_admin">Admin</label>
-          </div>
-          <div class="column tab-info-left"> Piikissä: <br> Current funds: </div>
-          <div class="column tab-info-right">
-            <div class="tab-info">
-              <span class="funds"></span>&nbsp;€
-            </div>
-          </div>
-        </div>
+    </ul>
+    <div class="row">
+      <div class="column centered">
+        <a class="button" href="#add">Lisää rahaa / Add money</a>
         <br>
         <br>
-        <br>
-        <input type="range" name="count" id="add-funds" class="add-funds-slider" min="0" max="50" value="10" step="0.1">
-        <br>
-        <br>
-        <div class="row">
-          <div class="column">
-            <div class="row">
-              <div class="column add-info-left"> Lisättävä summa: <br> To be added: </div>
-              <div class="column add-info-right">
-                <div class="add-funds-value">
-                  <span class="" id="add-funds-value">10</span>&nbsp;€
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="column">
-            <a class="button" href="#process">Lisää rahaa / Add funds</a>
-            <br>
-            <a class="button button-outline" href="index.html">Peruuta / Cancel</a>
-          </div>
-        </div>
-        <p>HUOM! Lisätyt rahat kytketään korttiisi. Jos hukkaat tai rikot kortin, menetät piikkiin lisätyt rahat. Rahoja ei voi nostaa piikistä pois.</p>
-        <p>NOTE! Money you'll add will be connected to your card. If you lose or break the card, you'll lose your money on the tab. Added money cannot be withdrawn from the tab.</p>
-        <script src="js/keyboard-config.js"></script>
+        <a class="button button-outline cancel-button" href="index.html">Peruuta / Cancel</a>
       </div>
     </div>
-  </body>
+  </div>
+  <div class="single-product page">
+    <div class="row names">
+      <div class="column name-column">
+        <span class="name"></span>
+      </div>
+      <div class="column tab-info-left"> Saldoa tällä hetkellä: <br> Current balance: </div>
+      <div class="column tab-info-right">
+        <div class="tab-info">
+          <span class="funds"></span>&nbsp;€
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="column">
+        <div class="product">
+          <img src="" class="product-img" width="150">
+          <h3></h3>
+          <p></p>
+        </div>
+      </div>
+      <div class="column">
+        <input type="range" name="count" id="count" class="count-slider" min="1" max="10" value="1">
+        <div class="calculations">
+          <span class="" id="count-value">1</span>&nbsp;kpl/pcs * <span class="" id="price"></span> € = <br>
+        </div>
+        <div class="total">
+          <span id="total"></span> € <br>
+        </div>
+        <br>
+        <a class="button buy-button" href="#buy">Osta / Buy</a>
+        <br>
+        <a class="button button-outline" href="index.html">Peruuta / Cancel</a>
+      </div>
+    </div>
+  </div>
+  <div class="message page">
+    <h1></h1>
+    <p></p>
+    <div class="centered">
+      <a class="button button-outline" href="index.html">Alkuun / To Start</a>
+    </div>
+  </div>
+  <div class="authorize page">
+    <h1>Pyydä hallituslaista / Ask for an Indecs' board member</h1>
+    <div class="row">
+      <div class="column">
+        <a class="button button-outline" href="index.html">Peruuta / Cancel</a>
+      </div>
+    </div>
+    <div class="hidden">
+      <form action="#add" method="get">
+        <input type="text" name="admin_id" id="admin_id" autocomplete="off">
+        <input class="button-primary" type="submit" value="Send">
+      </form>
+    </div>
+  </div>
+  <div class="add-funds page">
+    <br>
+    <div class="row names">
+      <div class="column">
+        <input type="text" class="name-input" name="first_name" id="first_name">
+      </div>
+      <div class="column">
+        <input type="text" class="name-input" name="last_name" id="last_name">
+      </div>
+      <div class="column">
+        <input type="checkbox" name="is_admin" id="is_admin">&nbsp; <label for="is_admin">Admin</label>
+      </div>
+      <div class="column tab-info-left"> Piikissä: <br> Current funds: </div>
+      <div class="column tab-info-right">
+        <div class="tab-info">
+          <span class="funds"></span>&nbsp;€
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <input type="range" name="count" id="add-funds" class="add-funds-slider" min="0" max="50" value="10" step="0.1">
+    <br>
+    <br>
+    <div class="row">
+      <div class="column">
+        <div class="row">
+          <div class="column add-info-left"> Lisättävä summa: <br> To be added: </div>
+          <div class="column add-info-right">
+            <div class="add-funds-value">
+              <span class="" id="add-funds-value">10</span>&nbsp;€
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <a class="button" href="#process">Lisää rahaa / Add funds</a>
+        <br>
+        <a class="button button-outline" href="index.html">Peruuta / Cancel</a>
+      </div>
+    </div>
+    <p>HUOM! Lisätyt rahat kytketään korttiisi. Jos hukkaat tai rikot kortin, menetät piikkiin lisätyt rahat. Rahoja ei
+      voi nostaa piikistä pois.</p>
+    <p>NOTE! Money you'll add will be connected to your card. If you lose or break the card, you'll lose your money on
+      the tab. Added money cannot be withdrawn from the tab.</p>
+    <script src="js/keyboard-config.js"></script>
+  </div>
+  </div>
+</body>
+<script>
+  // Event listener for the Aktivoi tästä button
+  document.getElementById("activate-button").addEventListener("click", function() {
+    // Trigger the hashchange event to simulate going to the next step
+    $(window).trigger('hashchange');
+  });
+</script>
 </html>
