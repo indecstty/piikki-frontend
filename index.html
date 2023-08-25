@@ -31,15 +31,15 @@
     <div class="frontpage page">
 
       <h1>Lue kortti. Read a card.</h1>
+      <!-- Add the centered button here -->
+      <div class="centered-button">
+        <a class="button" id="activate-button" href="#">Aktivoi lukija. Activate card reader.</a>
+      </div>
       <div class="hidden">
         <form action="#products" method="get">
           <input type="text" name="card_id" id="card_id" autofocus autocomplete="off">
           <input class="button-primary" type="submit" value="Send">
         </form>
-      </div>
-      <!-- Add the centered button here -->
-      <div class="centered-button">
-        <a class="button" id="activate-button" href="#">Aktivoi lukija. Activate card reader.</a>
       </div>
     </div>
 
@@ -186,9 +186,10 @@
 </body>
 <script>
   // Event listener for the Aktivoi tästä button
-  document.getElementById("activate-button").addEventListener("click", function() {
+  document.getElementById("activate-button").addEventListener("click", function () {
     // Trigger the hashchange event to simulate going to the next step
     $(window).trigger('hashchange');
   });
 </script>
+
 </html>
