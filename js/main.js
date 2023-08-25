@@ -33,7 +33,15 @@ $(function () {
       if (event.keyCode === 10 || event.keyCode === 13)
         event.preventDefault();
     });
-  
+
+    // Capture card hash from the input field
+    var capturedCardHash = $("#card_hash_input").val();
+
+    // Set the captured card hash in the card_id input field
+    if (capturedCardHash) {
+      $("#card_id").val(capturedCardHash);
+    }
+    
     // Event listener for form submission
     $('form').on('submit', function (event) {
       event.preventDefault(); // Prevent default form submission behavior
