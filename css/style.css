@@ -159,7 +159,7 @@ body {
 }
 .centered-button {
   text-align: center;
-  margin-top: 20px; /* Adjust the margin-top value as needed */
+  margin-top: 0px; /* Adjust the margin-top value as needed */
 }
 
 .centered-button .button {
