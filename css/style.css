@@ -97,12 +97,12 @@ body {
 
 /* Price Calculations Styling */
 .calculations {
-  font-size: 2em;
+  font-size: 1em;
 }
 
 /* Total Price Styling */
 .total {
-  font-size: 3em;
+  font-size: 2em;
   font-weight: bold;
 }
 
