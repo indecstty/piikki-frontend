@@ -3,6 +3,7 @@ body {
   cursor: hidden;
   background-color: #ffffff;
   font-style: Roboto, sans-serif;
+  overscroll-behavior-x: none;
 }
 
 /* Hidden Elements */
