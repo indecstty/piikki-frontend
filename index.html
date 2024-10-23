@@ -176,6 +176,8 @@
         <a class="button button-outline" href="index.html">Peruuta / Cancel</a>
       </div>
     </div>
+    <button id="decrement-button">- 0.10 €</button>
+    <button id="increment-button">+ 0.10 €</button>
     <p>HUOM! Lisätyt rahat kytketään korttiisi. Jos hukkaat tai rikot kortin, menetät piikkiin lisätyt rahat. Rahoja ei
       voi nostaa piikistä pois.</p>
     <p>NOTE! Money you'll add will be connected to your card. If you lose or break the card, you'll lose your money on
@@ -191,5 +193,38 @@
     $(window).trigger('hashchange');
   });
 </script>
+<script> // Handlaa decrement ja increment napit (ChatGPT:n käsialaa koko paska)
+  // Function to update the displayed value when the slider changes
+  function updateDisplayedValue() {
+    document.getElementById("add-funds-value").textContent = document.getElementById("add-funds").value;
+  }
 
+  // Event listener for the Increment button
+  document.getElementById("increment-button").addEventListener("click", function () {
+    var slider = document.getElementById("add-funds");
+    var currentValue = parseFloat(slider.value);
+    
+    // Increment by 0.1 and ensure the value doesn't exceed the max
+    if (currentValue + 0.1 <= parseFloat(slider.max)) {
+      slider.value = (currentValue + 0.1).toFixed(1); // Increment and round to 1 decimal place
+    }
+    updateDisplayedValue(); // Update the displayed value
+  });
+
+  // Event listener for the Decrement button
+  document.getElementById("decrement-button").addEventListener("click", function () {
+    var slider = document.getElementById("add-funds");
+    var currentValue = parseFloat(slider.value);
+
+    // Decrement by 0.1 and ensure the value doesn't go below the min
+    if (currentValue - 0.1 >= parseFloat(slider.min)) {
+      slider.value = (currentValue - 0.1).toFixed(1); // Decrement and round to 1 decimal place
+    }
+    updateDisplayedValue(); // Update the displayed value
+  });
+
+  // Update the display when the range slider changes
+  document.getElementById("add-funds").addEventListener("input", updateDisplayedValue);
+</script>
+</div>
 </html>
